@@ -1,5 +1,3 @@
-# quartz-demo
-
 #### 介绍
 springboot2.1.2集成quartz，动态管理job
 
@@ -15,3 +13,5 @@ springboot2.1.2集成quartz，动态管理job
 
 1. 修改application.yml里的数据库名称，导入sql文件(src/test/resources/sql/schedule_job.sql) 
 2. 启动DemoApplication.java
+
+-----------------------------------------------------------------------------------------------
