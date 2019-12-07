@@ -3,9 +3,9 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/lanjerry?useUnicode=yes&characterEncoding=UTF8&useSSL=false&serverTimezone=CTT&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/schedule_db?useUnicode=yes&characterEncoding=UTF8&useSSL=false&serverTimezone=CTT&allowMultiQueries=true
     username: root
-    password: 123456
+    password: sqlzyydxe
     hikari:
       max-lifetime: 1765000
       maximum-pool-size: 15
@@ -23,5 +23,39 @@ mybatis-plus:
       logic-delete-value: 1
       logic-not-delete-value: 0
     banner: false
+  #指明mapper.xml扫描位置(classpath* 代表编译后类文件根目录)
   mapper-locations: classpath:/mapper/*Mapper.xml
-  type-aliases-package: com.example.demo.domain
+  #指明实体扫描(多个package用逗号或者分号分隔)
+  type-aliases-package: com.riskeys.quartz.domain
+  configuration:
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#hystrix的超时时间
+hystrix:
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true
+        isolation:
+          thread:
+            timeoutInMilliseconds: 6000
+ribbon:
+  httpclient:
+     enabled: true # 默认开启需要禁用
+  okhttp:
+     enabled: false
+  #请求处理的超时时间（2分钟）
+  ReadTimeout: 120000
+  #请求连接的超时时间(30秒)
+  ConnectTimeout: 30000
+
+# LOGGING
+logging:
+  level:
+    root: INFO
+#    org.springframework.security: DEBUG
+#    org.springframework.cloud.netflix: INFO
+#    com.netflix.zuul: INFO
+    com.yowits: DEBUG

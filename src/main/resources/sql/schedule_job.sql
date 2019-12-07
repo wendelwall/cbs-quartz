@@ -27,6 +27,9 @@ CREATE TABLE `schedule_job`  (
   `cron_expression` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `bean_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `method_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `url` varchar(500) NULL DEFAULT NULL COMMENT '执行任务url',
+  `method` varchar(10) NOT NULL DEFAULT 'POST' COMMENT '执行任务方式，默认POST',
+  `body` LONGTEXT NULL DEFAULT NULL COMMENT '执行任务参数，默认{}',
   `status` int(1) NOT NULL DEFAULT 1 COMMENT '状态 1.启动 2.暂停',
   `delete_flag` tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否删除 0.否 1.是',
   `creator_id` int(11) NULL DEFAULT NULL COMMENT '创建人id',
@@ -39,7 +42,8 @@ CREATE TABLE `schedule_job`  (
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
-INSERT INTO `schedule_job` VALUES (1, '任务01', '0/2 * * * * ?', 'testJob01', 'execute', 1, 0, 1, 'admin', '2019-01-28 17:46:43', '2019-01-28 17:50:15');
-INSERT INTO `schedule_job` VALUES (2, '任务02', '0/2 * * * * ?', 'testJob02', 'execute', 1, 0, 1, 'admin', '2019-01-28 16:45:46', '2019-01-28 17:09:15');
+INSERT INTO `schedule_job` VALUES (1, '任务01', '0/2 * * * * ?', 'testJob01', 'execute', 'http://localhost:8082/rest/json','POST', '{}', 1, 0, 1, 'admin', '2019-01-28 17:46:43', '2019-01-28 17:50:15');
+INSERT INTO `schedule_job` VALUES (2, '任务02', '0/2 * * * * ?', 'testJob02', 'execute', 'http://localhost:8082/rest/json','POST', '{}', 1, 0, 1, 'admin', '2019-01-28 16:45:46', '2019-01-28 17:09:15');
+INSERT INTO `schedule_job` (`id`,`job_name`,`cron_expression`,`bean_name`,`method_name`,`url`,`method`,`body`,`status`,`delete_flag`,`creator_id`,`creator_name`,`created_time`,`updated_time`) VALUES (3,'中旺保-永安家财无忧险发送邮件任务','0 35 13 * * ?','','','http://localhost:10110/api/ops/pop/sendMail','POST','{\"startTime\":\"2019-08-23\",\"endTime\":\"2019-08-23\"}',1,0,1,'admin','2019-01-28 16:45:46','2019-01-28 17:09:15');
 
 SET FOREIGN_KEY_CHECKS = 1;
