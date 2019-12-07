@@ -4,6 +4,7 @@ package com.riskeys.quartz.controller;
 import com.riskeys.quartz.domain.ScheduleJob;
 import com.riskeys.quartz.model.vo.ScheduleJobVo;
 import com.riskeys.quartz.service.ScheduleJobService;
+import com.riskeys.quartz.util.UuidUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +35,7 @@ public class ScheduleJobController {
 //    @GetMapping("/add")
 //    public String add() {
 //        ScheduleJob job = new ScheduleJob();
+//        job.setId(UuidUtils.base58Uuid().toString());
 //        job.setJobName("任务02");
 //        job.setCronExpression("0/2 * * * * ?");
 //        job.setBeanName("testJob02");
@@ -49,6 +51,7 @@ public class ScheduleJobController {
     @PostMapping("/add")
     public void add(@RequestBody @Valid ScheduleJobVo vo) {
         ScheduleJob job = new ScheduleJob();
+        job.setId(UuidUtils.base58Uuid().toString());
         BeanUtils.copyProperties(vo, job);
         if(vo.getStatus() == 0){
             job.setStatus(1);

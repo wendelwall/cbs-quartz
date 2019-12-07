@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -12,6 +12,17 @@ spring:
   aop:
     proxy-target-class: true
     auto: true
+  redis:
+    #redis服务器地址（默认为localhost）
+    host: localhost
+    #redis端口（默认为6379）
+    port: 6379
+    #redis数据库索引（默认为0）
+    database: 0
+    #redis访问密码（默认为空）
+    password: sqlzyydxe
+    #redis连接超时时间（单位为毫秒）
+    timeout: 10000
 
 #mybatis-plus配置
 mybatis-plus:
